@@ -1,19 +1,20 @@
-import React from "react";
+import React, { FC } from "react";
 import "./FormInput.styles.scss";
 
-const FormInput = ({ handleChange, label, ...otherProps }) => {
+interface FormInputProps {
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  label: string;
+  type: string;
+  name: string;
+  value: string;
+  required: boolean;
+}
+
+const FormInput: FC<FormInputProps> = ({ onChange, label, ...otherProps }) => {
   return (
     <div className="group">
-      <input className="form-input" onChange={handleChange} {...otherProps} />
-      {label ? (
-        <label
-          className={`${
-            otherProps.value.length ? "shrink" : ""
-          } form-input-label`}
-        >
-          {label}
-        </label>
-      ) : null}
+      <input className="form-input" onChange={onChange} {...otherProps} />
+      {label ? <label className={`${otherProps.value.length ? "shrink" : ""} form-input-label`}>{label}</label> : null}
     </div>
   );
 };

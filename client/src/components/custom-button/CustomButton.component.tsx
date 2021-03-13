@@ -1,11 +1,15 @@
-import React from "react";
+import React, { FC } from "react";
 import "./CustomButton.styles.scss";
 
-const CustomButton = ({ children, isGoogleSignIn, ...otherProps }) => (
-  <button
-    className={`${isGoogleSignIn ? "google-sign-in" : ""} custom-button`}
-    {...otherProps}
-  >
+interface CustomButtonProps {
+  children: React.ReactNode;
+  isGoogleSignIn?: boolean;
+  type: "button" | "submit" | "reset" | undefined;
+  onClick?: () => void;
+}
+
+const CustomButton: FC<CustomButtonProps> = ({ children, isGoogleSignIn, ...otherProps }) => (
+  <button className={`${isGoogleSignIn ? "google-sign-in" : ""} custom-button`} {...otherProps}>
     {children}
   </button>
 );

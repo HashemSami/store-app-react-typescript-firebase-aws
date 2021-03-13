@@ -13,7 +13,7 @@ const SignIn = () => {
   });
 
   // this function will look into our database to confirm user signing in
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const { email, password } = formElements;
@@ -25,7 +25,7 @@ const SignIn = () => {
     }
   };
 
-  const handleChange = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = event.target;
 
     setFormElements({ ...formElements, [name]: value });
@@ -37,23 +37,9 @@ const SignIn = () => {
       <span>Sign in with your email and password</span>
 
       <form onSubmit={handleSubmit}>
-        <FormInput
-          name="email"
-          type="email"
-          value={formElements.email}
-          handleChange={handleChange}
-          label="email"
-          required
-        />
+        <FormInput name="email" type="email" value={formElements.email} onChange={handleChange} label="email" required />
 
-        <FormInput
-          name="password"
-          type="password"
-          value={formElements.password}
-          handleChange={handleChange}
-          label="password"
-          required
-        />
+        <FormInput name="password" type="password" value={formElements.password} onChange={handleChange} label="password" required />
 
         <div className="buttons">
           <CustomButton type="submit">Sign in</CustomButton>
