@@ -25,9 +25,9 @@ const Header: FC<HeaderProps> = ({ currentUser }) => {
         {currentUser ? (
           <div
             className="option"
-            onClick={() => {
+            onClick={async () => {
               auth.signOut();
-              auth.updateCurrentUser();
+              auth.updateCurrentUser(null);
             }}
           >
             SIGN OUT

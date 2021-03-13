@@ -1,4 +1,5 @@
-const SHOP_DATA = [
+import { ShopData } from "../../models";
+const SHOP_DATA: ShopData[] = [
   {
     id: 1,
     title: "Hats",

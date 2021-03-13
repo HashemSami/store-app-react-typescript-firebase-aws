@@ -9,6 +9,7 @@ import "firebase/firestore";
 import "firebase/auth";
 
 // setup the confiruratuion
+// console.log("api key", process.env.REACT_APP_FIREBASE_API_KEY);
 const config = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: "store-app-react-b5c13.firebaseapp.com",
@@ -22,7 +23,10 @@ const config = {
 
 // will create a function that will take out authed user data
 // and store it in our database in the users collection
-export const createUserProfileDocument = async (userAuth, additionalData) => {
+export const createUserProfileDocument = async (
+  userAuth: firebase.User | null,
+  additionalData?: any
+) => {
   // if the user logged of, the userAuth will be null, so we will return from this method
   if (!userAuth) return;
   console.log("once");

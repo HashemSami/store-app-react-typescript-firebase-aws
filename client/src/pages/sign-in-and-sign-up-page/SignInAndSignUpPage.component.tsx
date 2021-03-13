@@ -2,7 +2,7 @@ import React from "react";
 import "./SignInAndSignUpPage.styles.scss";
 
 import SignIn from "../../components/sign-in/SignIn.component";
-import SignUp from "../../components/sign-up/SingUp.conponent";
+import SignUp from "../../components/sign-up/SignUp.component";
 
 const SignInAndSignUpPage = () => {
   return (

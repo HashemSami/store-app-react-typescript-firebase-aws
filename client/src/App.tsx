@@ -2,16 +2,15 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import { Switch, Route } from "react-router-dom";
 
-import HomePage from "./pages/homepage/HomePage.component";
-import ShopPage from "./pages/shop/ShopPage.componenet";
+import HomePage from "./pages/home-page/HomePage.component";
+import ShopPage from "./pages/shop-page/ShopPage.component";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up-page/SignInAndSignUpPage.component";
 import Header from "./components/header/Header.component";
 
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 
 function App() {
-  const [currentUser, setCurrentUser] = useState(null);
-
+  const [currentUser, setCurrentUser] = useState<any>(null);
   // make an effect that will be terigered when the auth changes
   // this way we can check the authed user to our firebase
   useEffect(() => {
@@ -20,7 +19,9 @@ function App() {
     const unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
-
+        if (!userRef) {
+          return;
+        }
         // this is another listner similar to the onAuthStateChanged
         // which will be invoked every time userRef changes
         // with this we will check if the database has updated with that new user we entered

@@ -1,8 +1,18 @@
-import React from "react";
+import React, { FC } from "react";
 
 import "./CollectionItem.styles.scss";
 
-const CollectionItem = ({ id, name, price, imageUrl }) => {
+interface CollectionItemViewProps {
+  name: string;
+  price: number;
+  imageUrl: string;
+}
+
+const CollectionItemView: FC<CollectionItemViewProps> = ({
+  name,
+  price,
+  imageUrl,
+}) => {
   return (
     <div className="collection-item">
       <div className="image" style={{ backgroundImage: `url(${imageUrl})` }} />
@@ -14,4 +24,4 @@ const CollectionItem = ({ id, name, price, imageUrl }) => {
   );
 };
 
-export default CollectionItem;
+export default CollectionItemView;
