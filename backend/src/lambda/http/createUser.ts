@@ -13,16 +13,23 @@ const logger = createLogger("create user");
 
 export const handler = middy(
   async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
-    const user = await createUser(event);
+    try {
+      const user = await createUser(event);
 
-    logger.info("createUser event", event);
-    logger.info("created user info", { user });
+      logger.info("createUser event", event);
+      logger.info("created user info", { user });
 
-    if (user) {
       return {
         statusCode: 200,
         body: JSON.stringify({
           user,
+        }),
+      };
+    } catch (e) {
+      return {
+        statusCode: 500,
+        body: JSON.stringify({
+          error: "couldn't create user",
         }),
       };
     }

@@ -18,14 +18,7 @@ export const handler = middy(
 
       logger.info("getUser event", event);
       logger.info("gitting user info", { user });
-      if (!user && user.userId) {
-        return {
-          statusCode: 404,
-          body: JSON.stringify({
-            user: null,
-          }),
-        };
-      }
+
       return {
         statusCode: 200,
         body: JSON.stringify({

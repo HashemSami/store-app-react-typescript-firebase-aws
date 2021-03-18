@@ -30,7 +30,7 @@ export const UsersAccess = () => {
     await docClient
       .put({
         TableName: usersTable,
-        Item: { newUser },
+        Item: newUser,
       })
       .promise();
 

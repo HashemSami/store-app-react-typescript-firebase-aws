@@ -34,7 +34,7 @@ export const createUser = async (idToken: string, userData: any) => {
     }
   );
 
-  console.log("User:", response.data);
+  console.log("created user:", response.data);
 
   return response.data.user;
 };

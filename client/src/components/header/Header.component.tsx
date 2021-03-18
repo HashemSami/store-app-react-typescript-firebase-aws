@@ -5,11 +5,14 @@ import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import { auth } from "../../firebase/firebase.utils";
 
+import { useTypedSelector } from "../../hooks/useTypedSeletor";
+
 interface HeaderProps {
   currentUser: any;
 }
 
 const Header: FC<HeaderProps> = ({ currentUser }) => {
+  const { userId } = useTypedSelector((state) => state.currentUser);
   return (
     <div className="header">
       <Link className="logo-container" to="/">
@@ -22,12 +25,13 @@ const Header: FC<HeaderProps> = ({ currentUser }) => {
         <Link className="option" to="/contact">
           CONTACT
         </Link>
-        {currentUser ? (
+        {userId ? (
           <div
             className="option"
             onClick={async () => {
               auth.signOut();
-              auth.updateCurrentUser(null);
+              // creater an action creaator to dispatch a user to null
+              // await auth.updateCurrentUser();
             }}
           >
             SIGN OUT

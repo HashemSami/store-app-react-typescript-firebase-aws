@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { FC, useState, useEffect } from "react";
 import "./App.css";
 import { Switch, Route } from "react-router-dom";
 
@@ -8,24 +8,28 @@ import SignInAndSignUpPage from "./pages/sign-in-and-sign-up-page/SignInAndSignU
 import Header from "./components/header/Header.component";
 
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
+import { useActions } from "./hooks/useActions";
 
 function App() {
   const [currentUser, setCurrentUser] = useState<any>(null);
+  const { SetCurrentUser } = useActions();
   // make an effect that will be terigered when the auth changes
   // this way we can check the authed user to our firebase
   useEffect(() => {
     // this is a firebase auth method that can listen to auth state changes
     // and will fire up  every time the auth changes
-    const unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+    const unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
-        if (!userRef) {
+        const userData = await createUserProfileDocument(userAuth);
+        if (!userData) {
           return;
         }
+        const { token, uid, email } = userData;
 
-        if (!currentUser) {
-          setCurrentUser(userRef);
-        }
+        SetCurrentUser(uid, token);
+        // if (!currentUser) {
+        //   setCurrentUser(userRef);
+        // }
         // // this is another listner similar to the onAuthStateChanged
         // // which will be invoked every time userRef changes
         // // with this we will check if the database has updated with that new user we entered

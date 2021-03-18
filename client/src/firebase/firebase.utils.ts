@@ -22,9 +22,17 @@ const config = {
   measurementId: "G-B3Z046ZVEV",
 };
 
+interface createUserProfileDocumentProps {
+  userAuth: firebase.User | null;
+  SetCurrentUser: () => void;
+  additionalData?: any;
+}
+
 // will create a function that will take out authed user data
 // and store it in our database in the users collection
-export const createUserProfileDocument = async (userAuth: firebase.User | null, additionalData?: any) => {
+export const createUserProfileDocument = async (
+  userAuth: firebase.User | null
+) => {
   // if the user logged of, the userAuth will be null, so we will return from this method
   if (!userAuth) return;
   console.log(userAuth);
@@ -32,17 +40,9 @@ export const createUserProfileDocument = async (userAuth: firebase.User | null, 
   const token = await userAuth.getIdToken();
   console.log(token);
 
-  let user: any = await getUser(token);
+  const { uid, email } = userAuth;
 
-  await getUser(token);
-
-  if (!user) {
-    const userData = { ...userAuth, ...additionalData };
-
-    user = await createUser(token, userData);
-  }
-
-  return user;
+  return { token, uid, email };
 
   // if we have the object from the onAuthStateChanged method in the App componenet
   // first will check if the user exists in our database
