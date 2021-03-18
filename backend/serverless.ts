@@ -1,5 +1,5 @@
 import type { AWS } from "@serverless/typescript";
-import { custom, plugins, provider, functions } from "./serverlessConfigs";
+import { custom, plugins, provider, functions, resources } from "./serverlessConfigs";
 
 const serverlessConfiguration: AWS = {
   service: "store-app",
@@ -8,6 +8,7 @@ const serverlessConfiguration: AWS = {
   plugins,
   provider,
   functions,
+  resources,
 };
 
 module.exports = serverlessConfiguration;
