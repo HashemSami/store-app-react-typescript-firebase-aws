@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import { auth } from "../../firebase/firebase.utils";
+import CartIcon from "../cart-icon/CartIcon.component";
+import CartDropdown from "../cart-dropdown/CartDropdown.component";
 
 import { useTypedSelector } from "../../hooks/useTypedSeletor";
 import { useActions } from "../../hooks/useActions";
@@ -14,7 +16,13 @@ interface HeaderProps {
 
 const Header: FC = () => {
   const { signOutCurrentUser } = useActions();
-  const { userId } = useTypedSelector((state) => state.currentUser);
+  const {
+    userId,
+    hidden,
+  } = useTypedSelector(({ currentUser: { userId }, cart: { hidden } }) => ({
+    userId,
+    hidden,
+  }));
   return (
     <div className="header">
       <Link className="logo-container" to="/">
@@ -44,7 +52,9 @@ const Header: FC = () => {
             SIGN IN
           </Link>
         )}
+        <CartIcon />
       </div>
+      {hidden ? null : <CartDropdown />}
     </div>
   );
 };

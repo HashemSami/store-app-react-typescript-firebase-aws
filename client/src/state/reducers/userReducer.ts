@@ -15,11 +15,13 @@ const userReducer = (
   switch (action.type) {
     case UserActionTypes.SET_CURRENT_USER:
       return {
+        ...state,
         userId: action.payload.userId,
-        createdAt: action.payload.cteatedAt,
+        createdAt: action.payload.createdAt,
       };
     case UserActionTypes.SIGN_OUT_CURRENT_USER:
       return {
+        ...state,
         userId: null,
         createdAt: null,
       };

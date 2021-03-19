@@ -1,5 +1,5 @@
 export interface User {
   userId: string;
-  cteatedAt: string;
+  createdAt: string;
   displayName?: string;
 }

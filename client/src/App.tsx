@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect } from "react";
 import "./App.css";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 
 import HomePage from "./pages/home-page/HomePage.component";
 import ShopPage from "./pages/shop-page/ShopPage.component";
@@ -9,9 +9,11 @@ import Header from "./components/header/Header.component";
 
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import { useActions } from "./hooks/useActions";
+import { useTypedSelector } from "./hooks/useTypedSeletor";
 
 function App() {
   const { setCurrentUser } = useActions();
+  const { userId } = useTypedSelector((state) => state.currentUser);
   // make an effect that will be terigered when the auth changes
   // this way we can check the authed user to our firebase
   useEffect(() => {
@@ -34,7 +36,7 @@ function App() {
     // console.log(currentUser);
     // we want to clean this method every time this component unmouted
     return () => unsubscribeFromAuth();
-  }, [setCurrentUser]);
+  }, []);
 
   return (
     <div>
@@ -49,7 +51,7 @@ function App() {
         </Route>
 
         <Route exact path="/signIn">
-          <SignInAndSignUpPage />
+          {userId ? <Redirect to="/" /> : <SignInAndSignUpPage />}
         </Route>
       </Switch>
     </div>
