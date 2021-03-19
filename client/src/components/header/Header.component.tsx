@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import "./Header.styles.scss";
 import { Link } from "react-router-dom";
 
@@ -9,10 +9,6 @@ import CartDropdown from "../cart-dropdown/CartDropdown.component";
 
 import { useTypedSelector } from "../../hooks/useTypedSeletor";
 import { useActions } from "../../hooks/useActions";
-
-interface HeaderProps {
-  currentUser: any;
-}
 
 const Header: FC = () => {
   const { signOutCurrentUser } = useActions();
