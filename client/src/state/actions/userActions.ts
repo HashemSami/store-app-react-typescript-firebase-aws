@@ -6,4 +6,8 @@ interface SetCurrentUser {
   payload: User;
 }
 
-export type UserActions = SetCurrentUser;
+interface SignOutCurrentUser {
+  type: UserActionTypes.SIGN_OUT_CURRENT_USER;
+}
+
+export type UserActions = SetCurrentUser | SignOutCurrentUser;

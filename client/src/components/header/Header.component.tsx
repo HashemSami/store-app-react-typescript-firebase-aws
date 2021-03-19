@@ -6,12 +6,14 @@ import { ReactComponent as Logo } from "../../assets/crown.svg";
 import { auth } from "../../firebase/firebase.utils";
 
 import { useTypedSelector } from "../../hooks/useTypedSeletor";
+import { useActions } from "../../hooks/useActions";
 
 interface HeaderProps {
   currentUser: any;
 }
 
-const Header: FC<HeaderProps> = ({ currentUser }) => {
+const Header: FC = () => {
+  const { signOutCurrentUser } = useActions();
   const { userId } = useTypedSelector((state) => state.currentUser);
   return (
     <div className="header">
@@ -32,6 +34,7 @@ const Header: FC<HeaderProps> = ({ currentUser }) => {
               auth.signOut();
               // creater an action creaator to dispatch a user to null
               // await auth.updateCurrentUser();
+              signOutCurrentUser();
             }}
           >
             SIGN OUT

@@ -18,6 +18,11 @@ const userReducer = (
         userId: action.payload.userId,
         createdAt: action.payload.cteatedAt,
       };
+    case UserActionTypes.SIGN_OUT_CURRENT_USER:
+      return {
+        userId: null,
+        createdAt: null,
+      };
     default:
       return state;
   }

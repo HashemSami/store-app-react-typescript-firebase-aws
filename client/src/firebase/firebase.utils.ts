@@ -2,7 +2,6 @@
 // this will make us have access to the firebase functionality
 // with this variable
 import firebase from "firebase/app";
-import { getUser, createUser } from "../api/userApi";
 
 // next we need to attach what we need from google sevices to this variable we created
 // for example will attach the firestore na auth to our variable
@@ -22,12 +21,6 @@ const config = {
   measurementId: "G-B3Z046ZVEV",
 };
 
-interface createUserProfileDocumentProps {
-  userAuth: firebase.User | null;
-  SetCurrentUser: () => void;
-  additionalData?: any;
-}
-
 // will create a function that will take out authed user data
 // and store it in our database in the users collection
 export const createUserProfileDocument = async (
@@ -43,34 +36,6 @@ export const createUserProfileDocument = async (
   const { uid, email } = userAuth;
 
   return { token, uid, email };
-
-  // if we have the object from the onAuthStateChanged method in the App componenet
-  // first will check if the user exists in our database
-  // will call the ref rence that will have some method that we can perform to our data
-  // we could have .get() .add() .delete()
-  // const userRef = firestore.doc(`users/${userAuth.uid}`);
-  // // we also have a snap shot of the data so we can have information about the data we get
-  // const snapshot = await userRef.get();
-
-  // // snapshot will have a property exists that will give us true if the user exists in iur database
-  // if (!snapshot.exists) {
-  //   // to create the document in our database we have to use the userRef Object, not the snapshot object
-  //   const { displayName, email } = userAuth;
-  //   const createdAt = new Date();
-
-  //   try {
-  //     await userRef.set({
-  //       displayName,
-  //       email,
-  //       createdAt,
-  //       ...additionalData,
-  //     });
-  //   } catch (error) {
-  //     console.log("error creating user", error.message);
-  //   }
-  // }
-  // // will return the user ref so we can use it for other thing on the app
-  // return userRef;
 };
 
 // init app
@@ -102,11 +67,3 @@ export default firebase;
 // after signing up the user with firebase will get the id token and save it to send with the header of every request we make to our server
 
 // we can ge the id token by call getIdToken() after signing up the user
-
-// firebase.auth().signInWithEmailAndPassword(request.email, request.password).then(() => {
-//   firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
-//       // Send token to your backend via HTTPS
-//       callback(null, {
-//           statusCode: 200,
-//           body: JSON.stringify({token: idToken})
-//       });

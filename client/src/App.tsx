@@ -11,8 +11,7 @@ import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import { useActions } from "./hooks/useActions";
 
 function App() {
-  const [currentUser, setCurrentUser] = useState<any>(null);
-  const { SetCurrentUser } = useActions();
+  const { setCurrentUser } = useActions();
   // make an effect that will be terigered when the auth changes
   // this way we can check the authed user to our firebase
   useEffect(() => {
@@ -26,37 +25,20 @@ function App() {
         }
         const { token, uid, email } = userData;
 
-        SetCurrentUser(uid, token);
-        // if (!currentUser) {
-        //   setCurrentUser(userRef);
-        // }
-        // // this is another listner similar to the onAuthStateChanged
-        // // which will be invoked every time userRef changes
-        // // with this we will check if the database has updated with that new user we entered
-        // // or we get the data of the user from our database
-        // userRef.onSnapshot((snapshout) => {
-        //   // to get the data propeties from the snapshot we have to call data() method on it
-        //   // here will update the state with ther user stored in our database
-        //   if (!currentUser || currentUser.id !== snapshout.id) {
-        //     setCurrentUser({
-        //       id: snapshout.id,
-        //       ...snapshout.data(),
-        //     });
-        //   }
-        // });
+        setCurrentUser(uid, token);
       } else {
-        setCurrentUser(userAuth);
+        // setCurrentUser(userAuth);
       }
     });
 
     // console.log(currentUser);
     // we want to clean this method every time this component unmouted
     return () => unsubscribeFromAuth();
-  }, [currentUser]);
+  }, [setCurrentUser]);
 
   return (
     <div>
-      <Header currentUser={currentUser} />
+      <Header />
       <Switch>
         <Route exact path="/">
           <HomePage />

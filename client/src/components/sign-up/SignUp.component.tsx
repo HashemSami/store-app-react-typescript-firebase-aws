@@ -22,7 +22,7 @@ const SignUp: FC = () => {
     password: "",
     confirmPassword: "",
   });
-  const { SetCurrentUser } = useActions();
+  const { setCurrentUser } = useActions();
 
   // this function will talk to our server to look for the user after submitting
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -50,7 +50,7 @@ const SignUp: FC = () => {
       }
       const { token, uid } = userData;
 
-      SetCurrentUser(uid, token);
+      setCurrentUser(uid, token);
 
       setFormElements({
         displayName: "",
