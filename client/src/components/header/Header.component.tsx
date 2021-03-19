@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import "./Header.styles.scss";
 import { Link } from "react-router-dom";
 
@@ -7,10 +7,6 @@ import { auth } from "../../firebase/firebase.utils";
 
 import { useTypedSelector } from "../../hooks/useTypedSeletor";
 import { useActions } from "../../hooks/useActions";
-
-interface HeaderProps {
-  currentUser: any;
-}
 
 const Header: FC = () => {
   const { signOutCurrentUser } = useActions();
