@@ -6,7 +6,7 @@ interface UserState {
   createdAt: string | null;
 }
 
-const initialState = { userId: null, createdAt: null };
+const initialState: UserState = { userId: null, createdAt: null };
 
 const userReducer = (
   state: UserState = initialState,

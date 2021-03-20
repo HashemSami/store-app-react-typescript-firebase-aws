@@ -1,7 +1,13 @@
 import { CartActionTypes } from "../action-types";
 
+import { CollectionItem } from "../../models";
+
 interface ToggleCartHidden {
   type: CartActionTypes.TOGGLE_CART_HIDDEN;
 }
 
-export type CartActions = ToggleCartHidden;
+interface AddItem {
+  type: CartActionTypes.ADD_ITEM;
+  payload: CollectionItem;
+}
+export type CartActions = ToggleCartHidden | AddItem;

@@ -1,18 +1,20 @@
 import React, { FC } from "react";
 
+import CustomButton from "../custom-button/CustomButton.component";
+import { useActions } from "../../hooks/useActions";
+import { CollectionItem, ShopData } from "../../models";
+
 import "./CollectionItem.styles.scss";
 
-interface CollectionItemViewProps {
-  name: string;
-  price: number;
-  imageUrl: string;
-}
+// interface CollectionItemViewProps {
+//   name: string;
+//   price: number;
+//   imageUrl: string;
+// }
 
-const CollectionItemView: FC<CollectionItemViewProps> = ({
-  name,
-  price,
-  imageUrl,
-}) => {
+const CollectionItemView: FC<CollectionItem> = (collectionItem) => {
+  const { name, price, imageUrl } = collectionItem;
+  const { addItem } = useActions();
   return (
     <div className="collection-item">
       <div className="image" style={{ backgroundImage: `url(${imageUrl})` }} />
@@ -20,6 +22,13 @@ const CollectionItemView: FC<CollectionItemViewProps> = ({
         <span className="name">{name}</span>
         <span className="price">{price}</span>
       </div>
+      <CustomButton
+        onClick={() => addItem(collectionItem)}
+        type="button"
+        inverted
+      >
+        Add To Cart
+      </CustomButton>
     </div>
   );
 };

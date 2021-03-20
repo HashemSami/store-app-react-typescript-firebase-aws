@@ -3,4 +3,5 @@ export interface CollectionItem {
   name: string;
   imageUrl: string;
   price: number;
+  quantity?: number;
 }

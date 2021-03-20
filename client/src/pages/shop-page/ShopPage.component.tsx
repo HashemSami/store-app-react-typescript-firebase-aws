@@ -9,8 +9,8 @@ const ShopPage = () => {
   const [state, setState] = useState<ShopData[]>(SHOP_DATA);
   return (
     <div className="shop-page">
-      {state.map(({ id, ...otherCollectionProps }) => (
-        <CollectionPreview key={id} {...otherCollectionProps} />
+      {state.map((item) => (
+        <CollectionPreview key={item.id} {...item} />
       ))}
     </div>
   );
