@@ -3,16 +3,23 @@ import { ReactComponent as ShoppingIcon } from "../../assets/shopping-bag.svg";
 
 import { useActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSeletor";
+import { createSelector } from "reselect";
 
 import "./CartIcon.styles.scss";
+
+const calculateItemsCount = createSelector(
+  (cartItems) => cartItems,
+  (cartItems: any) =>
+    cartItems.reduce((accumelatedquantity: any, currItem: any) => {
+      if (!currItem.quantity) return 0;
+      return accumelatedquantity + currItem.quantity;
+    }, 0)
+);
 
 const CartIcon: FC = () => {
   const { setHiddenCart } = useActions();
   const itemsCount = useTypedSelector(({ cart }) =>
-    cart.cartItems.reduce((accumelatedquantity, currItem) => {
-      if (!currItem.quantity) return 0;
-      return accumelatedquantity + currItem.quantity;
-    }, 0)
+    calculateItemsCount(cart.cartItems)
   );
   return (
     <div className="cart-icon" onClick={setHiddenCart}>
