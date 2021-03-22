@@ -5,15 +5,26 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import HomePage from "./pages/home-page/HomePage.component";
 import ShopPage from "./pages/shop-page/ShopPage.component";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up-page/SignInAndSignUpPage.component";
+import CheckoutPage from "./pages/checkout-page/CheckoutPage.component";
 import Header from "./components/header/Header.component";
 
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import { useActions } from "./hooks/useActions";
 import { useTypedSelector } from "./hooks/useTypedSeletor";
+import { createSelector } from "reselect";
+
+// for memoiazing the useSelector hook so it will not be calle if
+// this value is being retrieved from the selector is not changed
+const getUserId = createSelector(
+  (userId: any) => userId,
+  (userId: any) => userId
+);
 
 function App() {
   const { setCurrentUser } = useActions();
-  const { userId } = useTypedSelector((state) => state.currentUser);
+  const userId = useTypedSelector(({ currentUser: { userId } }) =>
+    getUserId(userId)
+  );
   // make an effect that will be terigered when the auth changes
   // this way we can check the authed user to our firebase
   useEffect(() => {
@@ -46,8 +57,12 @@ function App() {
           <HomePage />
         </Route>
 
-        <Route exact path="/shop">
+        <Route path="/shop">
           <ShopPage />
+        </Route>
+
+        <Route exact path="/checkout">
+          <CheckoutPage />
         </Route>
 
         <Route exact path="/signIn">

@@ -7,10 +7,7 @@ import { RootState } from "../state";
 // then I can use useTypedSelector to get my state inside any component
 const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
 
-export const useCreateSelector = (
-  state: [],
-  [d, m, ...foo]: { (...res: unknown[]): unknown }[]
-) => {
-  //  if (!foo[0] && !foo[1]) return
-  // const result = createSelector(state,d,m,...foo);
-};
+export const useCreateSelector = createSelector(
+  (state) => state,
+  (state) => state
+);
