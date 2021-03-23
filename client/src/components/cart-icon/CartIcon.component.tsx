@@ -5,21 +5,26 @@ import { useActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSeletor";
 import { createSelector } from "reselect";
 
+import { CollectionItem } from "../../models";
+
 import "./CartIcon.styles.scss";
 
-const calculateItemsCount = createSelector(
-  (cartItems) => cartItems,
-  (cartItems: any) =>
-    cartItems.reduce((accumelatedquantity: any, currItem: any) => {
-      if (!currItem.quantity) return 0;
-      return accumelatedquantity + currItem.quantity;
-    }, 0)
+const createSelectorItemsCount = createSelector(
+  (cartItems: CollectionItem[]) => cartItems,
+  (cartItems: CollectionItem[]) =>
+    cartItems.reduce(
+      (accumelatedquantity: number, currItem: CollectionItem) => {
+        if (!currItem.quantity) return 0;
+        return accumelatedquantity + currItem.quantity;
+      },
+      0
+    )
 );
 
 const CartIcon: FC = () => {
   const { setHiddenCart } = useActions();
   const itemsCount = useTypedSelector(({ cart }) =>
-    calculateItemsCount(cart.cartItems)
+    createSelectorItemsCount(cart.cartItems)
   );
   return (
     <div className="cart-icon" onClick={setHiddenCart}>
