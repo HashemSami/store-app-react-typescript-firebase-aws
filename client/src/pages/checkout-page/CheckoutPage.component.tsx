@@ -4,6 +4,8 @@ import { useTypedSelector } from "../../hooks/useTypedSeletor";
 import { CollectionItem } from "../../models";
 import { createSelector } from "reselect";
 
+import CheckoutItem from "../../components/checkout-item/CheckoutItem.component";
+
 import "./CheckoutPage.styles.scss";
 
 const createSelectorCartItems = createSelector(
@@ -17,22 +19,15 @@ const createSelectorCartItems = createSelector(
 const createSelectorcartTotal = createSelector(
   (cartItems: CollectionItem[]) => cartItems,
   (cartItems: CollectionItem[]) =>
-    cartItems.reduce(
-      (accumelatedquantity: number, currItem: CollectionItem) => {
-        if (!currItem.quantity) return 0;
-        return accumelatedquantity + currItem.quantity * currItem.price;
-      },
-      0
-    )
+    cartItems.reduce((accumelatedquantity: number, currItem: CollectionItem) => {
+      if (!currItem.quantity) return 0;
+      return accumelatedquantity + currItem.quantity * currItem.price;
+    }, 0)
 );
 
 const CheckoutPage: FC = () => {
-  const cartItems = useTypedSelector(({ cart }) =>
-    createSelectorCartItems(cart.cartItems)
-  );
-  const cartTotal = useTypedSelector(({ cart: { cartItems } }) =>
-    createSelectorcartTotal(cartItems)
-  );
+  const cartItems = useTypedSelector(({ cart }) => createSelectorCartItems(cart.cartItems));
+  const cartTotal = useTypedSelector(({ cart: { cartItems } }) => createSelectorcartTotal(cartItems));
 
   return (
     <div className="checkout-page">
@@ -53,10 +48,12 @@ const CheckoutPage: FC = () => {
           <span>Remove</span>
         </div>
       </div>
-      {cartItems.map((item) => item.name)}
+      {cartItems.map(item => (
+        <CheckoutItem key={item.id} {...item} />
+      ))}
 
       <div className="total">
-        <span>Total: {cartTotal}</span>
+        <span>Total: ${cartTotal}</span>
       </div>
     </div>
   );
