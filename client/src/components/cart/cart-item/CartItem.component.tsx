@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { CollectionItem } from "../../models";
+import { CollectionItem } from "../../../models";
 
 import "./CartItem.styles.scss";
 

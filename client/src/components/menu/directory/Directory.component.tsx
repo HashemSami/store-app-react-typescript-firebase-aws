@@ -1,7 +1,7 @@
 import { useState, FC } from "react";
 import MenuItem from "../menu-item/MenuItem.component";
 import "./Directory.styles.scss";
-import { MenuSection } from "../../models";
+import { MenuSection } from "../../../models";
 
 const Directory: FC = () => {
   const sections: MenuSection[] = [

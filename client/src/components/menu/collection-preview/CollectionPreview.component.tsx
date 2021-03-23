@@ -3,7 +3,7 @@ import React, { FC } from "react";
 import "./CollectionPreview.styles.scss";
 
 import CollectionItemView from "../collection-item-view/CollectionItemView.component";
-import { CollectionItem, ShopData } from "../../models";
+import { CollectionItem, ShopData } from "../../../models";
 
 // interface CollectionPreviewProps {
 //   title: string;
@@ -18,7 +18,7 @@ const CollectionPreview: FC<ShopData> = ({ title, items }) => {
       <div className="preview">
         {items
           .filter((item, idx) => idx < 4)
-          .map((item) => (
+          .map(item => (
             <CollectionItemView key={item.id} {...item} />
           ))}
       </div>

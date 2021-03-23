@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import { auth } from "../../firebase/firebase.utils";
-import CartIcon from "../cart-icon/CartIcon.component";
-import CartDropdown from "../cart-dropdown/CartDropdown.component";
+import CartIcon from "../cart/cart-icon/CartIcon.component";
+import CartDropdown from "../cart/cart-dropdown/CartDropdown.component";
 
 import { useTypedSelector } from "../../hooks/useTypedSeletor";
 import { useActions } from "../../hooks/useActions";
@@ -22,9 +22,7 @@ const getHedden = createSelector(
 
 const Header: FC = () => {
   const { signOutCurrentUser } = useActions();
-  const userId = useTypedSelector(({ currentUser: { userId } }) =>
-    getUserId(userId)
-  );
+  const userId = useTypedSelector(({ currentUser: { userId } }) => getUserId(userId));
   const hidden = useTypedSelector(({ cart: { hidden } }) => getHedden(hidden));
   return (
     <div className="header">

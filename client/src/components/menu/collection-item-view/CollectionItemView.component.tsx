@@ -1,8 +1,8 @@
 import React, { FC } from "react";
 
-import CustomButton from "../custom-button/CustomButton.component";
-import { useActions } from "../../hooks/useActions";
-import { CollectionItem, ShopData } from "../../models";
+import CustomButton from "../../custom-button/CustomButton.component";
+import { useActions } from "../../../hooks/useActions";
+import { CollectionItem, ShopData } from "../../../models";
 
 import "./CollectionItem.styles.scss";
 
@@ -12,7 +12,7 @@ import "./CollectionItem.styles.scss";
 //   imageUrl: string;
 // }
 
-const CollectionItemView: FC<CollectionItem> = (collectionItem) => {
+const CollectionItemView: FC<CollectionItem> = collectionItem => {
   const { name, price, imageUrl } = collectionItem;
   const { addItem } = useActions();
   return (
@@ -22,11 +22,7 @@ const CollectionItemView: FC<CollectionItem> = (collectionItem) => {
         <span className="name">{name}</span>
         <span className="price">{price}</span>
       </div>
-      <CustomButton
-        onClick={() => addItem(collectionItem)}
-        type="button"
-        inverted
-      >
+      <CustomButton onClick={() => addItem(collectionItem)} type="button" inverted>
         Add To Cart
       </CustomButton>
     </div>
