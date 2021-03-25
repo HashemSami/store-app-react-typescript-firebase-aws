@@ -6,7 +6,8 @@ import reportWebVitals from "./reportWebVitals";
 import * as browserHistory from "history";
 import { Router } from "react-router-dom";
 import { Provider } from "react-redux";
-import { store } from "./state";
+import { PersistGate } from "redux-persist/integration/react";
+import { store, persistor } from "./state";
 
 const history = browserHistory.createBrowserHistory();
 
@@ -14,7 +15,9 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <Router history={history}>
-        <App />
+        <PersistGate persistor={persistor}>
+          <App />
+        </PersistGate>
       </Router>
     </Provider>
   </React.StrictMode>,

@@ -10,4 +10,14 @@ interface AddItem {
   type: CartActionTypes.ADD_ITEM;
   payload: CollectionItem;
 }
-export type CartActions = ToggleCartHidden | AddItem;
+
+interface ClearItem {
+  type: CartActionTypes.CLEAR_ITEM_FROM_CART;
+  payload: number;
+}
+
+interface RemoveItem {
+  type: CartActionTypes.REMOVE_ITEM;
+  payload: { id: number; quantity: number };
+}
+export type CartActions = ToggleCartHidden | AddItem | ClearItem | RemoveItem;

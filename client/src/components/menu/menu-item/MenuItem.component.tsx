@@ -3,16 +3,16 @@ import "./MenuItem.styles.scss";
 // this hook will help us pass the information of the URL we need from the main Component
 // instead of sending it to through the props
 import { useHistory, useRouteMatch, useLocation, useParams } from "react-router-dom";
-// import { MenuSection } from "../../models";
+import { MenuSection } from "../../../models";
 
-interface MenuItemProps {
-  title: string;
-  imageUrl: string;
-  size: string;
-  linkUrl: string;
-}
+// interface MenuItemProps {
+//   title: string;
+//   imageUrl: string;
+//   size: string;
+//   linkUrl: string;
+// }
 
-const MenuItem: FC<MenuItemProps> = ({ title, imageUrl, size, linkUrl }) => {
+const MenuItem: FC<MenuSection> = ({ title, imageUrl, size, linkUrl }) => {
   const history = useHistory();
   const location = useLocation();
   const prm = useParams();

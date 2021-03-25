@@ -1,33 +1,18 @@
 import { FC } from "react";
 
 import { useTypedSelector } from "../../hooks/useTypedSeletor";
-import { CollectionItem } from "../../models";
-import { createSelector } from "reselect";
+import { useCreateSelector } from "../../hooks/useCreateSelector";
 
 import CheckoutItem from "../../components/checkout-item/CheckoutItem.component";
 
 import "./CheckoutPage.styles.scss";
 
-const createSelectorCartItems = createSelector(
-  (cartItems: CollectionItem[]) => cartItems,
-  (cartItems: CollectionItem[]) => {
-    console.log("getting car items");
-    return cartItems;
-  }
-);
-
-const createSelectorcartTotal = createSelector(
-  (cartItems: CollectionItem[]) => cartItems,
-  (cartItems: CollectionItem[]) =>
-    cartItems.reduce((accumelatedquantity: number, currItem: CollectionItem) => {
-      if (!currItem.quantity) return 0;
-      return accumelatedquantity + currItem.quantity * currItem.price;
-    }, 0)
-);
-
 const CheckoutPage: FC = () => {
-  const cartItems = useTypedSelector(({ cart }) => createSelectorCartItems(cart.cartItems));
-  const cartTotal = useTypedSelector(({ cart: { cartItems } }) => createSelectorcartTotal(cartItems));
+  const { cartItemsCreateSelectors, cartTotalCreateSelector } = useCreateSelector();
+
+  const cartItems = useTypedSelector(({ cart: { cartItems } }) => cartItemsCreateSelectors(cartItems));
+
+  const cartTotal = useTypedSelector(({ cart: { cartItems } }) => cartTotalCreateSelector(cartItems));
 
   return (
     <div className="checkout-page">

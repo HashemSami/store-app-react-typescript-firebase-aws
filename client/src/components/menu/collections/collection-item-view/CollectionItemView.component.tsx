@@ -1,8 +1,8 @@
 import React, { FC } from "react";
 
-import CustomButton from "../../custom-button/CustomButton.component";
-import { useActions } from "../../../hooks/useActions";
-import { CollectionItem, ShopData } from "../../../models";
+import CustomButton from "../../../custom-button/CustomButton.component";
+import { useActions } from "../../../../hooks/useActions";
+import { CollectionItem, ShopData } from "../../../../models";
 
 import "./CollectionItem.styles.scss";
 

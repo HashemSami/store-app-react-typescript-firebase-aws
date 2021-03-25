@@ -9,21 +9,17 @@ import CartDropdown from "../cart/cart-dropdown/CartDropdown.component";
 
 import { useTypedSelector } from "../../hooks/useTypedSeletor";
 import { useActions } from "../../hooks/useActions";
-import { createSelector } from "reselect";
-
-const getUserId = createSelector(
-  (userId: any) => userId,
-  (userId: any) => userId
-);
-const getHedden = createSelector(
-  (hidden: any) => hidden,
-  (hidden: any) => hidden
-);
+import { useCreateSelector } from "../../hooks/useCreateSelector";
 
 const Header: FC = () => {
   const { signOutCurrentUser } = useActions();
-  const userId = useTypedSelector(({ currentUser: { userId } }) => getUserId(userId));
-  const hidden = useTypedSelector(({ cart: { hidden } }) => getHedden(hidden));
+
+  const { userCreateSelector, hiddenCreateSelector } = useCreateSelector();
+
+  const userId = useTypedSelector(({ currentUser: { userId } }) => userCreateSelector(userId));
+
+  const hidden = useTypedSelector(({ cart: { hidden } }) => hiddenCreateSelector(hidden));
+
   return (
     <div className="header">
       <Link className="logo-container" to="/">

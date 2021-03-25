@@ -3,7 +3,7 @@ import React, { FC } from "react";
 import "./CollectionPreview.styles.scss";
 
 import CollectionItemView from "../collection-item-view/CollectionItemView.component";
-import { CollectionItem, ShopData } from "../../../models";
+import { ShopData } from "../../../../models";
 
 // interface CollectionPreviewProps {
 //   title: string;
