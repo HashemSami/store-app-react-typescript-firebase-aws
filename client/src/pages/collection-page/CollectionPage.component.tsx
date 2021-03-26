@@ -8,18 +8,22 @@ import { useCreateSelector } from "../../hooks/useCreateSelector";
 import { useHistory, useRouteMatch, useLocation, useParams } from "react-router-dom";
 
 const CollectionPage: FC = () => {
-  const { params } = useRouteMatch();
+  const { params } = useRouteMatch<{ collectionId: string }>();
+
   const { getCollectionCreateSelector } = useCreateSelector();
 
-  const collectionItems = useTypedSelector(({ shop }) => getCollectionCreateSelector(params)(shop));
+  const collectionItems = useTypedSelector(({ shop }) => getCollectionCreateSelector(params.collectionId)(shop));
 
-  console.log(params);
+  const { title, items } = collectionItems;
 
   return (
-    <div className="category">
-      {collectionItems?.items.map(item => (
-        <CollectionItemView key={item.id} {...item} />
-      ))}
+    <div className="collection-page">
+      <h2 className="title">{title}</h2>
+      <div className="items">
+        {items.map(item => (
+          <CollectionItemView key={item.id} {...item} />
+        ))}
+      </div>
     </div>
   );
 };

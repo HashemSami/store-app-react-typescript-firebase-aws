@@ -4,6 +4,7 @@ import { useTypedSelector } from "../../hooks/useTypedSeletor";
 import { useCreateSelector } from "../../hooks/useCreateSelector";
 
 import CheckoutItem from "../../components/checkout-item/CheckoutItem.component";
+import StripeButton from "../../components/stripe-button/StripeButton.component";
 
 import "./CheckoutPage.styles.scss";
 
@@ -40,6 +41,7 @@ const CheckoutPage: FC = () => {
       <div className="total">
         <span>Total: ${cartTotal}</span>
       </div>
+      <StripeButton price={cartTotal} />
     </div>
   );
 };

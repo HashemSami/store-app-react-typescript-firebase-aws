@@ -3,24 +3,18 @@ import "./CollectionOverview.styles.scss";
 
 import { useTypedSelector } from "../../../../hooks/useTypedSeletor";
 import { useCreateSelector } from "../../../../hooks/useCreateSelector";
-// import { createSelector } from "reselect";
 
 import CollectionPreview from "../collection-preview/CollectionPreview.component";
 
-// const shopItemsCreateSelector = createSelector(
-//   (shopItems: ShopData[]) => shopItems,
-//   (shopItems: ShopData[]) => shopItems
-// );
-
 const CollectionOverview: FC = () => {
-  const { shopItemsCreateSelector } = useCreateSelector();
-  const shopItems = useTypedSelector(({ shop }) => shopItemsCreateSelector(shop));
+  const { shopItemsArrayCreateSelector } = useCreateSelector();
+  const shopItemsArray = useTypedSelector(({ shop }) => shopItemsArrayCreateSelector(shop));
 
   return (
     <div className="collection-overview">
-      {shopItems.map(item => (
-        <CollectionPreview key={item.id} {...item} />
-      ))}
+      {shopItemsArray.map(item => {
+        return <CollectionPreview key={item.id} {...item} />;
+      })}
     </div>
   );
 };

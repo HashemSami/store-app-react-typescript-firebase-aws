@@ -1,9 +1,8 @@
 import { FC } from "react";
+import "./CheckoutItem.styles.scss";
 
 import { useActions } from "../../hooks/useActions";
 import { CollectionItem } from "../../models";
-
-import "./CheckoutItem.styles.scss";
 
 const CheckoutItem: FC<CollectionItem> = item => {
   const { clearItem, removeItem, addItem } = useActions();

@@ -8,7 +8,7 @@ import SHOP_DATA from "../utils/shopData";
 
 const initialState = SHOP_DATA;
 
-const shopReducer = (state: ShopData[] = initialState, action: ShopActions) => {
+const shopReducer = (state: ShopData = initialState, action: ShopActions) => {
   switch (action.type) {
     default:
       return state;
