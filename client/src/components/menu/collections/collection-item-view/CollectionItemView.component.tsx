@@ -22,7 +22,7 @@ const CollectionItemView: FC<CollectionItem> = collectionItem => {
         <span className="name">{name}</span>
         <span className="price">{price}</span>
       </div>
-      <CustomButton onClick={() => addItem(collectionItem)} type="button" inverted>
+      <CustomButton onClick={() => addItem(collectionItem)} type="button" inverted withItem>
         Add To Cart
       </CustomButton>
     </div>

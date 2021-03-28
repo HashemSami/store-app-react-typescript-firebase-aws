@@ -1,6 +1,5 @@
 import { FC } from "react";
-import "./Header.styles.scss";
-import { Link } from "react-router-dom";
+import { HeaderContainer, LogoContainer, OptionLink, OptionsContainer } from "./Header.styles";
 
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import { auth } from "../../firebase/firebase.utils";
@@ -21,20 +20,16 @@ const Header: FC = () => {
   const hidden = useTypedSelector(({ cart: { hidden } }) => hiddenCreateSelector(hidden));
 
   return (
-    <div className="header">
-      <Link className="logo-container" to="/">
+    <HeaderContainer>
+      <LogoContainer to="/">
         <Logo className="logo" />
-      </Link>
-      <div className="options">
-        <Link className="option" to="/shop">
-          SHOP
-        </Link>
-        <Link className="option" to="/contact">
-          CONTACT
-        </Link>
+      </LogoContainer>
+      <OptionsContainer>
+        <OptionLink to="/shop">SHOP</OptionLink>
+        <OptionLink to="/contact">CONTACT</OptionLink>
         {userId ? (
-          <div
-            className="option"
+          <OptionLink
+            as="div"
             onClick={async () => {
               auth.signOut();
               // creater an action creaator to dispatch a user to null
@@ -43,16 +38,14 @@ const Header: FC = () => {
             }}
           >
             SIGN OUT
-          </div>
+          </OptionLink>
         ) : (
-          <Link className="option" to="/signIn">
-            SIGN IN
-          </Link>
+          <OptionLink to="/signIn">SIGN IN</OptionLink>
         )}
         <CartIcon />
-      </div>
+      </OptionsContainer>
       {hidden ? null : <CartDropdown />}
-    </div>
+    </HeaderContainer>
   );
 };
 

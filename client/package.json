@@ -26,6 +26,7 @@
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
+    "styled-components": "^5.2.1",
     "typescript": "^4.1.2",
     "web-vitals": "^1.0.1"
   },
@@ -56,6 +57,7 @@
   "devDependencies": {
     "@types/lodash.memoize": "^4.1.6",
     "@types/react-router-dom": "^5.1.7",
-    "@types/redux-logger": "^3.0.8"
+    "@types/redux-logger": "^3.0.8",
+    "@types/styled-components": "^5.1.9"
   }
 }
